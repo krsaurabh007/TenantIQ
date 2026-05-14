@@ -44,7 +44,7 @@ export default function Dashboard() {
       {/* Welcome */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-800">
-          Welcome , {user?.name}
+          Welcome Back, {user?.name}
         </h1>
         <p className="text-gray-500 text-sm mt-1">
           Here is what is happening in your workspace today.
