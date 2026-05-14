@@ -47,7 +47,7 @@ export default function Dashboard() {
           Welcome Back, {user?.name}
         </h1>
         <p className="text-gray-500 text-sm mt-1">
-          Here is what is happening in your workspace today.
+          Daily workspace summary
         </p>
       </div>
 
