@@ -2,7 +2,7 @@ require('dotenv').config();
 const app = require('./src/app');
 const { sequelize } = require('./src/config/database');
 const { createPublicSchema } = require('./src/utils/schemaManager');
-
+require('./src/config/redis')
 const PORT = process.env.PORT || 5000;
 
 async function startServer() {

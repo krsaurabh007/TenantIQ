@@ -2,6 +2,7 @@ const { validationResult } = require('express-validator');
 const { registerTenant, loginUser, generateAccessToken } = require('./auth.service');
 const jwt = require('jsonwebtoken');
 const { sequelize } = require('../../config/database');
+const redis = require('../../config/redis');
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
@@ -64,6 +65,11 @@ async function refresh(req, res, next) {
       return res.status(401).json({ success: false, message: 'No refresh token' });
     }
 
+    const isBlacklisted = await redis.get(`blacklist:${token}`);
+    if (isBlacklisted) {
+      return res.status(401).json({ success: false, message: 'Token has been invalidated' });
+    }
+
     const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
 
     const newAccessToken = generateAccessToken({
@@ -81,8 +87,25 @@ async function refresh(req, res, next) {
 }
 
 async function logout(req, res) {
-  res.clearCookie('refreshToken', COOKIE_OPTIONS);
-  return res.status(200).json({ success: true, message: 'Logged out successfully' });
+  try {
+    const token = req.cookies.refreshToken;
+
+    if (token) {
+      const decoded = jwt.decode(token);
+      if (decoded && decoded.exp) {
+        const remainingSeconds = decoded.exp - Math.floor(Date.now() / 1000);
+        if (remainingSeconds > 0) {
+          await redis.set(`blacklist:${token}`, 'true', 'EX', remainingSeconds);
+        }
+      }
+    }
+
+    res.clearCookie('refreshToken', COOKIE_OPTIONS);
+    return res.status(200).json({ success: true, message: 'Logged out successfully' });
+  } catch (err) {
+    res.clearCookie('refreshToken', COOKIE_OPTIONS);
+    return res.status(200).json({ success: true, message: 'Logged out successfully' });
+  }
 }
 
 async function getMe(req, res, next) {
