@@ -1,85 +1,102 @@
 # 🚀 TenantIQ — Multi-Tenant SaaS Platform
 
-A production-ready **full-stack multi-tenant SaaS application** that enables organizations to manage projects, collaborate with teams, and monitor performance while ensuring **complete tenant isolation** using **PostgreSQL Schema-Based Multi-Tenancy**.
+<p align="center">
 
-> Built with **React • Node.js • Express • PostgreSQL • Sequelize • TypeScript**
+<img src="./images/banner.png" width="100%" alt="TenantIQ Banner"/>
+
+</p>
+
+<p align="center">
+
+<img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white"/>
+<img src="https://img.shields.io/badge/Node.js-Express-339933?logo=node.js&logoColor=white"/>
+<img src="https://img.shields.io/badge/PostgreSQL-Sequelize-4169E1?logo=postgresql&logoColor=white"/>
+<img src="https://img.shields.io/badge/Redis-Caching-DC382D?logo=redis&logoColor=white"/>
+<img src="https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white"/>
+<img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white"/>
+
+</p>
+
+A **production-ready multi-tenant SaaS project management platform** built with **React, Node.js, PostgreSQL, Redis, Docker, and TypeScript**.
+
+Each organization receives its own PostgreSQL schema, providing complete database-level isolation while sharing the same application instance. TenantIQ includes secure authentication, team collaboration, Kanban project management, analytics dashboards, and role-based access control.
 
 ---
 
-## 🌐 Live Demo
+# 🌐 Live Demo
 
-| Service | Link |
-|---------|------|
+| Service | URL |
+|---------|-----|
 | **Frontend** | https://tenantiq-frontend.vercel.app |
 | **Backend API** | https://tenantiq-backend.onrender.com |
 
-> **Note:** The backend is hosted on Render's free tier and may take **30–50 seconds** to wake up on the first request.
+> ⚠️ **Note:** Backend is hosted on Render's free tier. The first request may take around **30–50 seconds** while the server wakes up.
 
 ---
 
 # 🔑 Demo Account
 
-Instead of creating a new company, use the demo account below.
+You can either register your own company or use the demo account.
 
-| Field | Value |
-|------|------|
-| Company | NovaTech Solutions |
-| Email | admin@novatech.com |
-| Password | 123456 |
+| Email | Password |
+|-------|----------|
+| demo@novatech.com | Demo@123 |
 
-> Or register your own company to experience automatic PostgreSQL schema creation and tenant isolation.
+> Every newly registered company automatically receives its own PostgreSQL schema.
 
 ---
 
 # ✨ Features
 
-## 🔐 Authentication & Authorization
+## 🔐 Authentication
 
-- Company registration with automatic tenant schema creation
+- Company Registration
+- Automatic PostgreSQL Schema Creation
 - JWT Authentication
-- Access Token + Refresh Token
-- Refresh token stored in HttpOnly Cookies
-- Role-Based Access Control
-- Secure authentication middleware
+- Refresh Token Authentication
+- Secure httpOnly Cookies
+- Role-Based Authorization
 
 ---
 
 ## 👥 Team Management
 
-- Invite members via email
-- Manager & Viewer roles
-- Accept invitation workflow
-- Member management
+- Invite Members
+- Role Assignment
+- Accept Invitation Flow
+- Remove Members
+- Organization Management
 
 ---
 
 ## 📁 Project Management
 
-- Create projects
-- Kanban board
-- Drag & Drop tasks
-- Task priorities
-- Due dates
-- Task assignment
+- Create Projects
+- Update/Delete Projects
+- Drag & Drop Kanban Board
+- Task Assignment
+- Task Priorities
+- Task Status Management
 
 ---
 
 ## 📊 Analytics Dashboard
 
-- Project statistics
-- Task completion trends
-- Top performers
-- Project progress visualization
+- Dashboard Overview
+- Project Statistics
+- Task Completion Trends
+- Top Performers
+- Progress Charts
 
 ---
 
-## 🏢 Multi-Tenant Architecture
+## 🏢 Multi-Tenancy
 
-- PostgreSQL Schema-Based Multi-Tenancy
-- Automatic schema provisioning
-- Shared public schema
-- Complete tenant data isolation
-- Zero cross-tenant data leakage
+- PostgreSQL Schema Per Tenant
+- Automatic Schema Creation
+- Complete Database Isolation
+- Shared Public Schema
+- Zero Cross-Tenant Data Leakage
 
 ---
 
@@ -88,44 +105,17 @@ Instead of creating a new company, use the demo account below.
 ```text
                  React + TypeScript
                         │
-                    Axios API
+                        ▼
+                Express REST API
                         │
-                Express.js Backend
-                        │
-        Tenant Context Middleware
-                        │
-          Sequelize ORM + PostgreSQL
-                        │
-        Schema-Based Multi-Tenancy
+        ┌───────────────┼────────────────┐
+        ▼               ▼                ▼
+ PostgreSQL           Redis          JWT Auth
+(Schema per         Cache Layer      Cookies
+ Tenant)
+
+           Docker Compose Environment
 ```
-
----
-
-# 🗄 Database Architecture
-
-```text
-tenantiq
-│
-├── public
-│   ├── tenants
-│   └── users
-│
-├── tenant_novatech
-│   ├── users
-│   ├── projects
-│   ├── tasks
-│   ├── invites
-│   └── project_members
-│
-├── tenant_company_b
-│   ├── users
-│   ├── projects
-│   ├── tasks
-│   ├── invites
-│   └── project_members
-```
-
-Each organization receives its **own PostgreSQL schema**, ensuring complete isolation of application data while sharing a common application instance.
 
 ---
 
@@ -133,75 +123,165 @@ Each organization receives its **own PostgreSQL schema**, ensuring complete isol
 
 ## Frontend
 
-| Technology | Purpose |
-|------------|----------|
-| React 18 | UI Framework |
-| TypeScript | Static Typing |
-| Vite | Build Tool |
-| Tailwind CSS | Styling |
-| Zustand | Global State |
-| React Query | Server State Management |
-| React Router v6 | Routing |
-| Recharts | Analytics Charts |
-| @hello-pangea/dnd | Kanban Drag & Drop |
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Query
+- Zustand
+- React Router v6
+- Axios
+- Recharts
+- @hello-pangea/dnd
 
 ---
 
 ## Backend
 
-| Technology | Purpose |
-|------------|----------|
-| Node.js | Runtime |
-| Express.js | REST API |
-| PostgreSQL | Database |
-| Sequelize | ORM |
-| JWT | Authentication |
-| bcryptjs | Password Hashing |
-| express-validator | Validation |
-| cookie-parser | Cookie Management |
+- Node.js
+- Express.js
+- PostgreSQL
+- Sequelize ORM
+- Redis
+- JWT
+- bcryptjs
+- express-validator
+- cookie-parser
 
 ---
 
-## Infrastructure
+## DevOps & Infrastructure
 
-| Service | Purpose |
-|---------|----------|
-| Vercel | Frontend Hosting |
-| Render | Backend Hosting |
-| Supabase | PostgreSQL Database |
-| GitHub Actions | CI/CD |
+- Docker
+- Docker Compose
+- GitHub Actions
+- Vercel
+- Render
+- Supabase
 
 ---
 
 # 📸 Application Screenshots
 
-> Screenshots will be added here.
+## Dashboard
 
-- Login
-- Dashboard
-- Projects
-- Kanban Board
-- Team Management
-- Analytics
+![Dashboard](./images/dashboard.png)
+
+---
+
+## Projects
+
+![Projects](./images/projects.png)
+
+---
+
+## Kanban Board
+
+![Kanban](./images/kanban.png)
+
+---
+
+## Team Management
+
+![Team](./images/team.png)
+
+---
+
+## Analytics
+
+![Analytics](./images/analytics.png)
+
+---
+
+# 🗄 Multi-Tenant Database Design
+
+```text
+TenantIQ Database
+
+public
+│
+├── tenants
+└── users
+
+tenant_novatech
+│
+├── users
+├── projects
+├── tasks
+├── invites
+└── project_members
+
+tenant_company_b
+│
+├── users
+├── projects
+├── tasks
+├── invites
+└── project_members
+```
+
+Each organization receives its own isolated schema, ensuring complete separation of data while sharing the same PostgreSQL database instance.
+
+---
+
+# 📂 Project Structure
+
+```text
+TenantIQ
+│
+├── tenantiq-frontend
+│   ├── src
+│   ├── public
+│   ├── Dockerfile
+│   └── package.json
+│
+├── tenantiq-backend
+│   ├── src
+│   ├── Dockerfile
+│   ├── package.json
+│   └── .env.example
+│
+├── docker-compose.yml
+│
+└── README.md
+```
 
 ---
 
 # 🚀 Running Locally
 
-## Prerequisites
-
-- Node.js 18+
-- PostgreSQL
-- Git
-
----
-
-## Backend
+## Using Docker (Recommended)
 
 ```bash
 git clone https://github.com/krsaurabh007/TenantIQ.git
 
-cd TenantIQ/tenantiq-backend
+cd TenantIQ
+
+docker compose up --build
+```
+
+Application URLs
+
+Frontend
+
+```
+http://localhost:5173
+```
+
+Backend
+
+```
+http://localhost:5000
+```
+
+---
+
+## Manual Setup
+
+### Backend
+
+```bash
+cd tenantiq-backend
 
 npm install
 
@@ -212,59 +292,43 @@ npm run dev
 
 ---
 
-## Frontend
+### Frontend
 
 ```bash
-cd TenantIQ/tenantiq-frontend
+cd tenantiq-frontend
 
 npm install
 
 npm run dev
 ```
 
-Open:
+---
 
-```
-http://localhost:5173
-```
+# 💡 Key Highlights
+
+- Production-ready Architecture
+- PostgreSQL Schema-Based Multi-Tenancy
+- Dockerized Development
+- Redis Caching
+- JWT Authentication
+- Role-Based Access Control
+- Responsive UI
+- Drag & Drop Kanban
+- Analytics Dashboard
+- Secure Refresh Token Authentication
 
 ---
 
-# 📁 Project Structure
+# 🗺 Roadmap
 
-```text
-TenantIQ
-│
-├── tenantiq-frontend
-│
-│   ├── src
-│   ├── components
-│   ├── pages
-│   ├── hooks
-│   ├── api
-│   └── store
-│
-├── tenantiq-backend
-│
-│   ├── middleware
-│   ├── modules
-│   ├── config
-│   ├── utils
-│   └── server.js
-```
-
----
-
-# 🎯 Future Improvements
-
-- Email notifications
-- Activity logs
-- Audit history
-- File uploads
-- WebSocket real-time updates
-- Microservices migration
-- Kubernetes deployment
-- AWS Infrastructure
+- Email Notifications
+- File Attachments
+- Activity Timeline
+- WebSocket Real-time Updates
+- Audit Logs
+- Kubernetes Deployment
+- AWS Deployment
+- Performance Monitoring
 
 ---
 
@@ -272,10 +336,17 @@ TenantIQ
 
 **Saurabh Kumar**
 
-- GitHub: https://github.com/krsaurabh007
-- LinkedIn: https://linkedin.com/in/saurabh-kumar-99009b24a
-- Email: saurabhkumar4040@gmail.com
+Software Developer @ Appsndevices Technologies Pvt. Ltd.
+
+📧 Email  
+saurabhkumar4040@gmail.com
+
+💼 LinkedIn  
+https://linkedin.com/in/saurabh-kumar-99009b24a
+
+🐙 GitHub  
+https://github.com/krsaurabh007
 
 ---
 
-⭐ If you found this project useful, consider giving it a star.
+⭐ If you found this project useful, consider giving it a **Star**.
