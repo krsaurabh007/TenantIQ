@@ -187,12 +187,6 @@ You can either register your own company or use the demo account.
 
 ---
 
-## Analytics
-
-![Analytics](./images/analytics.png)
-
----
-
 # 🗄 Multi-Tenant Database Design
 
 ```text
