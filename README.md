@@ -25,7 +25,7 @@ Instead of creating a new company, use the demo account below.
 |------|------|
 | Company | NovaTech Solutions |
 | Email | admin@novatech.com |
-| Password | Demo@123 |
+| Password | 123456 |
 
 > Or register your own company to experience automatic PostgreSQL schema creation and tenant isolation.
 
